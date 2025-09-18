@@ -17,7 +17,7 @@ func main() {
 func run(count uint8, w io.Writer) {
 	ch1 := generator(count) // генератор чисел
 	ch2 := stageCube(ch1)   // возведение в куб
-	consumeWriter(w, ch2)   // читаем и выводим результат
+	consumer(w, ch2)        // читаем и выводим результат
 }
 
 // generator создаёт канал uint8 и пишет в него числа от 1 до count
@@ -45,8 +45,8 @@ func stageCube(in <-chan uint8) <-chan float64 {
 	return out
 }
 
-// consumeWriter читает все значения из канала и выводит их через io.Writer
-func consumeWriter(w io.Writer, ch <-chan float64) {
+// consumer читает все значения из канала и выводит их через io.Writer
+func consumer(w io.Writer, ch <-chan float64) {
 	for v := range ch {
 		fmt.Fprintln(w, v)
 	}
