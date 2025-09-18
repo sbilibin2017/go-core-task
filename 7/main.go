@@ -14,7 +14,7 @@ func main() {
 	ch3 := generator([]int{5, 6})
 
 	merged := fanIn(ch1, ch2, ch3)
-	printNumber(os.Stdout, merged)
+	consumer(os.Stdout, merged)
 }
 
 // generator превращает слайс чисел в канал, из которого можно последовательно читать эти числа.
@@ -47,10 +47,10 @@ func fanIn(channels ...<-chan int) <-chan int {
 	return out
 }
 
-// printNumber читает все числа из канала и записывает их в указанный writer.
+// consumer читает все числа из канала и записывает их в указанный writer.
 // w — объект io.Writer, куда будут выводиться числа.
 // ch — канал int, из которого читаются значения.
-func printNumber(w io.Writer, ch <-chan int) {
+func consumer(w io.Writer, ch <-chan int) {
 	for v := range ch {
 		fmt.Fprintln(w, v)
 	}
