@@ -1,0 +1,66 @@
+@startuml
+' Главный поток программы
+actor Main
+' Участники: кастомная waitGroup и три горутины
+participant "myWaitGroup" as WG
+participant "Goroutine 1" as G1
+participant "Goroutine 2" as G2
+participant "Goroutine 3" as G3
+
+' Main увеличивает счётчик waitGroup на 3
+Main -> WG: Add(3)
+note right of WG
+  Добавляем 3 задачи:
+  counter увеличивается на 3.
+  Канал done остаётся открытым до завершения всех Done.
+end note
+activate WG
+
+' Main запускает первую горутину
+Main -> G1: start
+activate G1
+G1 -> WG: Done() via defer
+note right of WG
+  Goroutine 1 завершила задачу:
+  counter уменьшается на 1.
+  Если counter = 0, канал done закрывается.
+end note
+deactivate G1
+
+' Main запускает вторую горутину
+Main -> G2: start
+activate G2
+G2 -> WG: Done() via defer
+note right of WG
+  Goroutine 2 завершила задачу:
+  counter уменьшается на 1.
+end note
+deactivate G2
+
+' Main запускает третью горутину
+Main -> G3: start
+activate G3
+G3 -> WG: Done() via defer
+note right of WG
+  Goroutine 3 завершила задачу:
+  counter уменьшается на 1.
+  counter = 0 → канал done закрывается.
+end note
+deactivate G3
+
+' Main вызывает Wait()
+Main -> WG: Wait()
+note right of WG
+  Wait блокирует выполнение, пока counter > 0.
+  После закрытия done Wait возвращается.
+end note
+deactivate WG
+
+' Main продолжает выполнение
+Main -> Main: Все задачи завершены
+note right of Main
+  Все горутины завершены,
+  канал done пуст, программа завершает выполнение.
+end note
+
+@enduml
