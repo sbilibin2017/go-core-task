@@ -15,7 +15,7 @@ func main() {
 		log.Fatal(err)
 		return
 	}
-	fmt.Println("SHA256 with salt:", hash)
+	fmt.Println(hash)
 }
 
 // run выполняет весь функционал задания 1 и возвращает SHA256 строку и ошибку
@@ -34,7 +34,6 @@ func run() (string, error) {
 
 	// 3. Объединяем все значения в одну строку
 	combined := combineToString(numDecimal, numOctal, numHex, pi, name, isActive, complexNum)
-	fmt.Println("Combined string:", combined)
 
 	// 4. Преобразуем строку в срез рун
 	runes := toRuneSlice(combined)
@@ -46,18 +45,20 @@ func run() (string, error) {
 }
 
 // printTypes выводит значения и их типы
-func printTypes(values ...any) {
-	names := []string{"Decimal", "Octal", "Hex", "Float", "String", "Bool", "Complex"}
-	for i, v := range values {
-		fmt.Printf("%s: %v, type: %v\n", names[i], v, reflect.TypeOf(v))
-	}
+func printTypes(numDecimal, numOctal, numHex int, pi float64, name string, isActive bool, complexNum complex64) {
+	fmt.Printf("Decimal: %v, type: %v\n", numDecimal, reflect.TypeOf(numDecimal))
+	fmt.Printf("Octal:   %v, type: %v\n", numOctal, reflect.TypeOf(numOctal))
+	fmt.Printf("Hex:     %v, type: %v\n", numHex, reflect.TypeOf(numHex))
+	fmt.Printf("Float:   %v, type: %v\n", pi, reflect.TypeOf(pi))
+	fmt.Printf("String:  %v, type: %v\n", name, reflect.TypeOf(name))
+	fmt.Printf("Bool:    %v, type: %v\n", isActive, reflect.TypeOf(isActive))
+	fmt.Printf("Complex: %v, type: %v\n", complexNum, reflect.TypeOf(complexNum))
 }
 
 // combineToString объединяет все значения в одну строку
-func combineToString(values ...any) string {
+func combineToString(numDecimal, numOctal, numHex int, pi float64, name string, isActive bool, complexNum complex64) string {
 	return fmt.Sprintf("%v%v%v%v%v%v%v",
-		values[0], values[1], values[2], values[3],
-		values[4], values[5], values[6])
+		numDecimal, numOctal, numHex, pi, name, isActive, complexNum)
 }
 
 // toRuneSlice преобразует строку в срез рун

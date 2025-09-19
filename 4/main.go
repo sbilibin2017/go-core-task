@@ -5,6 +5,10 @@ import (
 	"log"
 )
 
+// main — точка входа программы.
+// Создаёт два слайса строк, затем вызывает функцию run,
+// которая возвращает элементы из первого слайса, отсутствующие во втором.
+// В случае ошибки программа завершает выполнение с сообщением об ошибке.
 func main() {
 	slice1 := []string{"apple", "banana", "cherry", "date", "43", "lead", "gno1"}
 	slice2 := []string{"banana", "date", "fig"}
@@ -14,7 +18,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Result:", result)
+	fmt.Println("Результат:", result)
 }
 
 // run возвращает элементы из slice1, которых нет в slice2, сохраняя порядок

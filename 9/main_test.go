@@ -51,7 +51,7 @@ func TestConsumeWriter(t *testing.T) {
 	close(inCh)
 
 	var buf bytes.Buffer
-	consumeWriter(&buf, inCh)
+	consumer(&buf, inCh)
 
 	output := strings.TrimSpace(buf.String())
 	lines := strings.Split(output, "\n")

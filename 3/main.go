@@ -18,16 +18,16 @@ func run() error {
 	m.Add("one", 1)
 	m.Add("two", 2)
 
-	log.Println("Exists 'one':", m.Exists("one"))
+	log.Println("Существует ключ 'one':", m.Exists("one"))
 
 	val, ok := m.Get("two")
-	log.Println("Value 'two':", val, "Exists:", ok)
+	log.Println("Значение по ключу 'two':", val, "Существует:", ok)
 
 	m.Remove("one")
-	log.Println("Exists 'one' after remove:", m.Exists("one"))
+	log.Println("Существует ключ 'one' после удаления:", m.Exists("one"))
 
 	copyMap := m.Copy()
-	log.Println("Copy of map:", copyMap)
+	log.Println("Копия карты:", copyMap)
 
 	return nil
 }
