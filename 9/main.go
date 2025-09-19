@@ -39,7 +39,7 @@ func stageCube(in <-chan uint8) <-chan float64 {
 	go func() {
 		defer close(out)
 		for n := range in {
-			out <- float64(n) * float64(n) * float64(n)
+			out <- float64(n * n * n)
 		}
 	}()
 	return out
