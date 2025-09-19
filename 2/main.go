@@ -15,34 +15,34 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Returned slice from run:", newSlice)
+	fmt.Println("Слайс, возвращённый из run:", newSlice)
 }
 
 // run демонстрирует работу с слайсами целых чисел.
 // Возвращает слайс после удаления элемента по индексу 3.
 func run(originalSlice []int) ([]int, error) {
-	fmt.Println("Original slice:", originalSlice)
+	fmt.Println("Исходный слайс:", originalSlice)
 
 	// 1. Фильтрация четных чисел
 	evenSlice := sliceExample(originalSlice)
-	fmt.Println("Even numbers:", evenSlice)
+	fmt.Println("Чётные числа:", evenSlice)
 
 	// 2. Добавление элемента
 	addedSlice := addElements(originalSlice, 999)
-	fmt.Println("After adding 999:", addedSlice)
+	fmt.Println("После добавления 999:", addedSlice)
 
 	// 3. Копирование слайса
 	copiedSlice := copySlice(originalSlice)
 	originalSlice[0] = 0 // изменение оригинала не влияет на копию
-	fmt.Println("Copied slice:", copiedSlice)
-	fmt.Println("Modified original slice:", originalSlice)
+	fmt.Println("Копия слайса:", copiedSlice)
+	fmt.Println("Изменённый исходный слайс:", originalSlice)
 
 	// 4. Удаление элемента по индексу
 	newSlice, err := removeElement(originalSlice, 3)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("After removing index 3:", newSlice)
+	fmt.Println("После удаления элемента с индексом 3:", newSlice)
 
 	return newSlice, nil
 }

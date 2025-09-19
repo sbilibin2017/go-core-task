@@ -42,7 +42,7 @@ func TestPrintNumber(t *testing.T) {
 	ch := generator([]int{7, 8, 9})
 
 	var buf bytes.Buffer
-	printNumber(&buf, ch)
+	consumer(&buf, ch)
 
 	expected := "7\n8\n9\n"
 	assert.Equal(t, expected, buf.String(), "printNumber должен записывать все числа канала в writer")
